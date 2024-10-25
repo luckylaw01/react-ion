@@ -1,17 +1,18 @@
 import React from 'react';
 import './Expenses.css';
 import ExpenseItem from './ExpenseItem';
+import Card from '../UI/Card';
 
-function Expenses() {
+const Expenses = () => {
     const expenses = [
-        { title: 'Car Insurance', amount: 294.67, date: new Date(2021, 2, 28) },
-        { title: 'New Bike', amount: 94.67, date: new Date(2021, 2, 28) },
-        { title: 'Car Repair', amount: 394.67, date: new Date(2021, 2, 28) },
-        { title: 'Food', amount: 494.67, date: new Date(2021, 2, 28) }
+        { title: 'Car Insurance', amount: 294.67, date: new Date(2021, 2, 13) },
+        { title: 'New Bike', amount: 94.67, date: new Date(2022, 5, 19) },
+        { title: 'Car Repair', amount: 394.67, date: new Date(2023, 1, 8) },
+        { title: 'Food', amount: 494.67, date: new Date(2021, 9, 22) }
       ];
 
   return (
-    <div className='expenses'>
+    <Card className='expenses'>
       <ExpenseItem
         amount={expenses[0].amount}  // Correctly pass the amount
         title={expenses[0].title}
@@ -32,7 +33,7 @@ function Expenses() {
         title={expenses[3].title}
         date={expenses[3].date}
       />
-    </div>
+    </Card>
   )
 }
 
