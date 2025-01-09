@@ -1,38 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Expenses.css';
-import ExpenseItem from './ExpenseItem';
 import Card from '../UI/Card';
+import ExpenseFilter from './ExpenseFilter';
+import ExpensesList from './ExpensesList';
+import ExpenseChart from './ExpensesChart';
 
-const Expenses = () => {
-    const expenses = [
-        { title: 'Car Insurance', amount: 294.67, date: new Date(2021, 2, 13) },
-        { title: 'New Bike', amount: 94.67, date: new Date(2022, 5, 19) },
-        { title: 'Car Repair', amount: 394.67, date: new Date(2023, 1, 8) },
-        { title: 'Food', amount: 494.67, date: new Date(2021, 9, 22) }
-      ];
+const Expenses = ( props ) => {
+    
+  const [filteredYear, setFilteredYear] = useState('2020');
+  
+
+  const filterChangeHandler = selectedYear => {
+    setFilteredYear(selectedYear);
+  };
+      
+  const filteredExpenses = props.items.filter((expense) => {
+    return expense.date.getFullYear().toString() === filteredYear;
+  });
+
+  
 
   return (
+    
     <Card className='expenses'>
-      <ExpenseItem
-        amount={expenses[0].amount}  // Correctly pass the amount
-        title={expenses[0].title}
-        date={expenses[0].date}  // Correctly pass the date
-      />
-      <ExpenseItem
-        amount={expenses[1].amount}  // Correctly pass the amount
-        title={expenses[1].title}
-        date={expenses[1].date}  // Correctly pass the date
-      />
-      <ExpenseItem
-        amount={expenses[2].amount}  // Correctly pass the amount
-        title={expenses[2].title}
-        date={expenses[2].date}  // Correctly pass the date
-      />
-      <ExpenseItem
-        amount={expenses[3].amount}
-        title={expenses[3].title}
-        date={expenses[3].date}
-      />
+      <ExpenseFilter selected={filteredYear} onChangeFilter={filterChangeHandler} />
+      <ExpenseChart Expenses={filteredExpenses} />
+      <ExpensesList items={filteredExpenses} />
+      
+
+      {/* <ExpenseItem
+        amount={props.items[0].amount}  // Correctly pass the amount
+        title={props.items[0].title}
+        date={props.items[0].date}  // Correctly pass the date
+      /> */}
+     
     </Card>
   )
 }
